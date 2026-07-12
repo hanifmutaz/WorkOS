@@ -37,29 +37,50 @@ export default async function ProjectDetailPage({
     .order("created_at", { ascending: false });
 
   const taskIds = tasks?.map((t) => t.id) ?? [];
+  type TimeEntryRow = { id: string; task_id: string; started_at: string; ended_at: string | null };
+
   const { data: timeEntries } = taskIds.length
     ? await supabase
       .from("time_entries")
       .select("id, task_id, started_at, ended_at")
       .in("task_id", taskIds)
-    : { data: [] };
+    : { data: [] as TimeEntryRow[] };
 
   const timeMap = aggregateTimeEntries(timeEntries ?? []);
+
+  type AttachmentRow = {
+    id: string;
+    task_id: string;
+    file_name: string;
+    storage_path: string;
+    file_size: number | null;
+  };
 
   const { data: attachments } = taskIds.length
     ? await supabase
       .from("attachments")
       .select("id, task_id, file_name, storage_path, file_size")
       .in("task_id", taskIds)
-    : { data: [] };
+    : { data: [] as AttachmentRow[] };
 
-  const attachmentMap: Record<string, typeof attachments> = {};
+  const attachmentMap: Record<string, AttachmentRow[]> = {};
   for (const a of attachments ?? []) {
     if (!attachmentMap[a.task_id]) attachmentMap[a.task_id] = [];
-    attachmentMap[a.task_id]!.push(a);
+    attachmentMap[a.task_id].push(a);
   }
 
-  function withTiming(t: { id: string }) {
+  type TaskRow = {
+    id: string;
+    project_id: string;
+    title: string;
+    description: string | null;
+    status: string;
+    priority: string;
+    deadline: string | null;
+    milestone_id: string | null;
+  };
+
+  function withTiming(t: TaskRow) {
     return {
       ...t,
       baseSeconds: timeMap[t.id]?.baseSeconds ?? 0,
