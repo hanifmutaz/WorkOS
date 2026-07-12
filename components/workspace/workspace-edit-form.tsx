@@ -15,6 +15,7 @@ type Workspace = {
 };
 
 export function WorkspaceEditForm({ workspace }: { workspace: Workspace }) {
+  const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(workspace.name);
   const [icon, setIcon] = useState(workspace.icon);
   const [color, setColor] = useState(workspace.color);
@@ -39,6 +40,7 @@ export function WorkspaceEditForm({ workspace }: { workspace: Workspace }) {
         return;
       }
       show("Workspace disimpan");
+      setIsEditing(false);
     });
   }
 
@@ -50,6 +52,28 @@ export function WorkspaceEditForm({ workspace }: { workspace: Workspace }) {
         return;
       }
     });
+  }
+
+  if (!isEditing) {
+    return (
+      <div className="flex items-center justify-between rounded-xl border border-border bg-surface p-4">
+        <div className="flex items-center gap-2">
+          <span
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-lg"
+            style={{ backgroundColor: `${workspace.color}22` }}
+          >
+            {workspace.icon}
+          </span>
+          <span className="text-sm font-medium text-white">{workspace.name}</span>
+        </div>
+        <button
+          onClick={() => setIsEditing(true)}
+          className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted hover:border-primary hover:text-primary"
+        >
+          Edit
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -98,9 +122,21 @@ export function WorkspaceEditForm({ workspace }: { workspace: Workspace }) {
           {isPending ? "Nyimpen..." : "Simpan"}
         </button>
         <button
+          onClick={() => {
+            setIsEditing(false);
+            setName(workspace.name);
+            setIcon(workspace.icon);
+            setColor(workspace.color);
+            setError(null);
+          }}
+          className="rounded-lg px-4 py-2 text-sm text-muted hover:text-white"
+        >
+          Batal
+        </button>
+        <button
           onClick={() => setShowDeleteConfirm(true)}
           disabled={isPending}
-          className="rounded-lg border border-red-400 px-4 py-2 text-sm font-medium text-red-400"
+          className="ml-auto rounded-lg border border-red-400 px-4 py-2 text-sm font-medium text-red-400"
         >
           Hapus workspace
         </button>

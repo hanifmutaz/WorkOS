@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { WorkspaceEditForm } from "@/components/workspace/workspace-edit-form";
-import { ProjectForm } from "@/components/project/project-form";
+import { AddProjectButton } from "@/components/project/add-project-button";
 import { ProjectCard } from "@/components/project/project-card";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -51,7 +51,7 @@ export default async function WorkspaceDetailPage({
       </div>
 
       <div className="max-w-sm">
-        <ProjectForm workspaceId={workspace.id} />
+        <AddProjectButton workspaceId={workspace.id} />
       </div>
     </div>
   );

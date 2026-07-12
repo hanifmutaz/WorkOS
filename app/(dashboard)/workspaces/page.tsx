@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { WorkspaceForm } from "@/components/workspace/workspace-form";
+import { AddWorkspaceButton } from "@/components/workspace/add-workspace-button";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 
 export default async function WorkspacesPage() {
@@ -25,7 +25,7 @@ export default async function WorkspacesPage() {
       )}
 
       <div className="max-w-sm">
-        <WorkspaceForm />
+        <AddWorkspaceButton />
       </div>
     </div>
   );

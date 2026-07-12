@@ -7,7 +7,7 @@ import { useToast } from "@/components/toast";
 const ICONS = ["📁", "🏢", "💻", "🧪", "🎓", "💼", "❤️", "📚", "🚀"];
 const COLORS = ["#38bdf8", "#f472b6", "#a78bfa", "#facc15", "#4ade80", "#fb7185"];
 
-export function WorkspaceForm({ onDone }: { onDone?: () => void }) {
+export function WorkspaceForm({ onDone, onCancel }: { onDone?: () => void; onCancel?: () => void }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [icon, setIcon] = useState(ICONS[0]);
   const [color, setColor] = useState(COLORS[0]);
@@ -50,9 +50,8 @@ export function WorkspaceForm({ onDone }: { onDone?: () => void }) {
             key={i}
             type="button"
             onClick={() => setIcon(i)}
-            className={`rounded-lg border px-2 py-1 text-sm ${
-              icon === i ? "border-primary bg-background" : "border-border"
-            }`}
+            className={`rounded-lg border px-2 py-1 text-sm ${icon === i ? "border-primary bg-background" : "border-border"
+              }`}
           >
             {i}
           </button>
@@ -65,9 +64,8 @@ export function WorkspaceForm({ onDone }: { onDone?: () => void }) {
             key={c}
             type="button"
             onClick={() => setColor(c)}
-            className={`h-6 w-6 rounded-full border-2 ${
-              color === c ? "border-white" : "border-transparent"
-            }`}
+            className={`h-6 w-6 rounded-full border-2 ${color === c ? "border-white" : "border-transparent"
+              }`}
             style={{ backgroundColor: c }}
           />
         ))}
@@ -75,13 +73,24 @@ export function WorkspaceForm({ onDone }: { onDone?: () => void }) {
 
       {error && <p className="text-sm text-red-400">{error}</p>}
 
-      <button
-        type="submit"
-        disabled={isPending}
-        className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-background hover:opacity-90 disabled:opacity-50"
-      >
-        {isPending ? "Nyimpen..." : "Tambah Workspace"}
-      </button>
+      <div className="flex gap-2">
+        <button
+          type="submit"
+          disabled={isPending}
+          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-background hover:opacity-90 disabled:opacity-50"
+        >
+          {isPending ? "Nyimpen..." : "Tambah Workspace"}
+        </button>
+        {onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="rounded-lg px-4 py-2 text-sm text-muted hover:text-white"
+          >
+            Batal
+          </button>
+        )}
+      </div>
     </form>
   );
 }

@@ -7,6 +7,19 @@ import { useToast } from "@/components/toast";
 const STATUSES = ["planning", "active", "done", "archived"];
 const PRIORITIES = ["low", "medium", "high"];
 
+const STATUS_COLOR: Record<string, string> = {
+  planning: "text-muted border-border",
+  active: "text-primary border-primary",
+  done: "text-green-400 border-green-400",
+  archived: "text-muted border-border",
+};
+
+const PRIORITY_COLOR: Record<string, string> = {
+  low: "bg-slate-500/20 text-slate-300",
+  medium: "bg-amber-500/20 text-amber-300",
+  high: "bg-red-500/20 text-red-300",
+};
+
 type Project = {
   id: string;
   workspace_id: string;
@@ -18,6 +31,7 @@ type Project = {
 };
 
 export function ProjectEditForm({ project }: { project: Project }) {
+  const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(project.name);
   const [status, setStatus] = useState(project.status);
   const [priority, setPriority] = useState(project.priority);
@@ -45,6 +59,7 @@ export function ProjectEditForm({ project }: { project: Project }) {
         return;
       }
       show("Project disimpan");
+      setIsEditing(false);
     });
   }
 
@@ -56,6 +71,28 @@ export function ProjectEditForm({ project }: { project: Project }) {
     startTransition(async () => {
       await deleteProject(project.id, project.workspace_id);
     });
+  }
+
+  if (!isEditing) {
+    return (
+      <div className="flex items-center justify-between rounded-xl border border-border bg-surface p-4">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium text-white">{project.name}</span>
+          <span className={`rounded-full border px-2 py-0.5 text-xs ${STATUS_COLOR[project.status]}`}>
+            {project.status}
+          </span>
+          <span className={`rounded-full px-2 py-0.5 text-xs ${PRIORITY_COLOR[project.priority]}`}>
+            {project.priority}
+          </span>
+        </div>
+        <button
+          onClick={() => setIsEditing(true)}
+          className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted hover:border-primary hover:text-primary"
+        >
+          Edit
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -113,11 +150,22 @@ export function ProjectEditForm({ project }: { project: Project }) {
           {isPending ? "Nyimpen..." : "Simpan"}
         </button>
         <button
+          onClick={() => {
+            setIsEditing(false);
+            setName(project.name);
+            setStatus(project.status);
+            setPriority(project.priority);
+            setError(null);
+          }}
+          className="rounded-lg px-4 py-2 text-sm text-muted hover:text-white"
+        >
+          Batal
+        </button>
+        <button
           onClick={handleDelete}
           disabled={isPending}
-          className={`rounded-lg px-4 py-2 text-sm font-medium ${
-            confirmDelete ? "bg-red-500 text-white" : "border border-red-400 text-red-400"
-          }`}
+          className={`ml-auto rounded-lg px-4 py-2 text-sm font-medium ${confirmDelete ? "bg-red-500 text-white" : "border border-red-400 text-red-400"
+            }`}
         >
           {confirmDelete ? "Yakin hapus?" : "Hapus project"}
         </button>

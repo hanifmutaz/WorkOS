@@ -4,7 +4,15 @@ import { useRef, useState, useTransition } from "react";
 import { createMilestone } from "@/app/(dashboard)/milestones/actions";
 import { useToast } from "@/components/toast";
 
-export function MilestoneForm({ projectId }: { projectId: string }) {
+export function MilestoneForm({
+    projectId,
+    onDone,
+    onCancel,
+}: {
+    projectId: string;
+    onDone?: () => void;
+    onCancel?: () => void;
+}) {
     const formRef = useRef<HTMLFormElement>(null);
     const [error, setError] = useState<string | null>(null);
     const [isPending, startTransition] = useTransition();
@@ -21,6 +29,7 @@ export function MilestoneForm({ projectId }: { projectId: string }) {
             }
             formRef.current?.reset();
             show("Milestone dibuat");
+            onDone?.();
         });
     }
 
@@ -37,8 +46,13 @@ export function MilestoneForm({ projectId }: { projectId: string }) {
                 disabled={isPending}
                 className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-background hover:opacity-90 disabled:opacity-50"
             >
-                {isPending ? "..." : "+ Milestone"}
+                {isPending ? "..." : "Simpan"}
             </button>
+            {onCancel && (
+                <button type="button" onClick={onCancel} className="text-sm text-muted hover:text-white">
+                    Batal
+                </button>
+            )}
             {error && <p className="text-sm text-red-400">{error}</p>}
         </form>
     );

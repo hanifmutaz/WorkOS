@@ -1,8 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { ProjectEditForm } from "@/components/project/project-edit-form";
-import { TaskForm } from "@/components/task/task-form";
+import { AddTaskButton } from "@/components/task/add-task-button";
 import { TaskItem } from "@/components/task/task-item";
-import { MilestoneForm } from "@/components/milestone/milestone-form";
+import { AddMilestoneButton } from "@/components/milestone/add-milestone-button";
 import { MilestoneGroupHeader } from "@/components/milestone/milestone-group-header";
 import { aggregateTimeEntries } from "@/lib/time";
 import { notFound } from "next/navigation";
@@ -109,7 +109,7 @@ export default async function ProjectDetailPage({
 
       <h2 className="mb-3 text-sm font-medium text-muted">Milestones</h2>
       <div className="mb-6 max-w-sm">
-        <MilestoneForm projectId={project.id} />
+        <AddMilestoneButton projectId={project.id} />
       </div>
 
       {milestones?.map((m) => {
@@ -148,7 +148,7 @@ export default async function ProjectDetailPage({
       </div>
 
       <div className="max-w-sm">
-        <TaskForm projectId={project.id} milestones={milestones ?? []} />
+        <AddTaskButton projectId={project.id} milestones={milestones ?? []} />
       </div>
     </div>
   );
