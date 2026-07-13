@@ -84,7 +84,7 @@ export function WorkspaceEditForm({ workspace }: { workspace: Workspace }) {
         className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-white outline-none focus:border-primary"
       />
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {ICONS.map((i) => (
           <button
             key={i}

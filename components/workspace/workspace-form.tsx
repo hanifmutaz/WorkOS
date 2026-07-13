@@ -44,7 +44,7 @@ export function WorkspaceForm({ onDone, onCancel }: { onDone?: () => void; onCan
         required
       />
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {ICONS.map((i) => (
           <button
             key={i}
