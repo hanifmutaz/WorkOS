@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/skeleton";
 
 export default function ProjectDetailLoading() {
   return (
-    <div className="p-6 text-white">
+    <div className="p-4 text-white sm:p-6">
       <Skeleton className="mb-4 h-4 w-24" />
       <Skeleton className="mb-6 h-8 w-56" />
       <Skeleton className="mb-8 h-56 max-w-sm" />

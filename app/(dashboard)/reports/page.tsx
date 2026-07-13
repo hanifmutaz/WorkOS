@@ -53,7 +53,7 @@ export default async function ReportsPage() {
   });
 
   return (
-    <div className="p-6 text-white">
+    <div className="p-4 text-white sm:p-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Reports</h1>
         <ExportCSVButton rows={exportRows} />

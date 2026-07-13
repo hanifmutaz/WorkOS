@@ -93,7 +93,7 @@ export default async function ProjectDetailPage({
   const unassignedTasks = tasks?.filter((t) => !t.milestone_id) ?? [];
 
   return (
-    <div className="p-6 text-white">
+    <div className="p-4 text-white sm:p-6">
       <Link
         href={`/workspaces/${project.workspace_id}`}
         className="mb-4 inline-block text-sm text-muted hover:text-white"

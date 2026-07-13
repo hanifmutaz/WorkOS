@@ -11,7 +11,7 @@ export default async function WorkspacesPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="p-6 text-white">
+    <div className="p-4 text-white sm:p-6">
       <h1 className="mb-6 text-2xl font-semibold">Workspaces</h1>
 
       <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

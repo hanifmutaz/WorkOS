@@ -23,7 +23,7 @@ export default async function DashboardPage() {
     .limit(8);
 
   return (
-    <div className="p-6 text-white">
+    <div className="p-4 text-white sm:p-6">
       <h1 className="mb-6 text-2xl font-semibold">Dashboard</h1>
 
       <div className="mb-8">

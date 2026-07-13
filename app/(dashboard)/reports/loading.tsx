@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/skeleton";
 
 export default function ReportsLoading() {
   return (
-    <div className="p-6 text-white">
+    <div className="p-4 text-white sm:p-6">
       <div className="mb-6 flex items-center justify-between">
         <Skeleton className="h-8 w-32" />
         <Skeleton className="h-9 w-32" />
