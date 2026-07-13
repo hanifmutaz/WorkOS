@@ -60,7 +60,7 @@ export function TaskForm({
           defaultValue=""
           className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-white outline-none focus:border-primary"
         >
-          <option value="">Tanpa milestone</option>
+          <option value="">Tanpa grup</option>
           {milestones.map((m) => (
             <option key={m.id} value={m.id}>{m.name}</option>
           ))}

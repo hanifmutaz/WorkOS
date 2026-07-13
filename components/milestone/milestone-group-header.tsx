@@ -32,7 +32,7 @@ export function MilestoneGroupHeader({
                 show(res.error, "error");
                 return;
             }
-            show("Milestone dihapus (task di dalamnya pindah ke Tanpa Milestone)");
+            show("Grup dihapus (task di dalamnya pindah ke Tanpa Grup)");
         });
     }
 
@@ -49,7 +49,7 @@ export function MilestoneGroupHeader({
                 disabled={isPending}
                 className={`text-xs ${confirmDelete ? "text-red-400" : "text-muted hover:text-red-400"}`}
             >
-                {confirmDelete ? "yakin?" : "hapus milestone"}
+                {confirmDelete ? "yakin?" : "hapus grup"}
             </button>
         </div>
     );

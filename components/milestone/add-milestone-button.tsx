@@ -5,7 +5,7 @@ import { MilestoneForm } from "@/components/milestone/milestone-form";
 
 export function AddMilestoneButton({ projectId }: { projectId: string }) {
   return (
-    <CollapsibleAdd label="+ Tambah Milestone">
+    <CollapsibleAdd label="+ Tambah Grup">
       {(close) => <MilestoneForm projectId={projectId} onDone={close} />}
     </CollapsibleAdd>
   );

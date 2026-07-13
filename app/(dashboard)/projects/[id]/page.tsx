@@ -107,7 +107,7 @@ export default async function ProjectDetailPage({
         <ProjectEditForm project={project} />
       </div>
 
-      <h2 className="mb-3 text-sm font-medium text-muted">Milestones</h2>
+      <h2 className="mb-3 text-sm font-medium text-muted">Grup</h2>
       <div className="mb-6 max-w-sm">
         <AddMilestoneButton projectId={project.id} />
       </div>
@@ -129,7 +129,7 @@ export default async function ProjectDetailPage({
               {milestoneTasks.length ? (
                 milestoneTasks.map((t) => <TaskItem key={t.id} task={withTiming(t)} />)
               ) : (
-                <p className="text-sm text-muted">Belum ada task di milestone ini.</p>
+                <p className="text-sm text-muted">Belum ada task di grup ini.</p>
               )}
             </div>
           </div>
@@ -137,7 +137,7 @@ export default async function ProjectDetailPage({
       })}
 
       <h2 className="mb-3 text-sm font-medium text-muted">
-        {milestones?.length ? "Tanpa Milestone" : "Tasks"}
+        {milestones?.length ? "Tanpa Grup" : "Tasks"}
       </h2>
       <div className="mb-4 space-y-2">
         {unassignedTasks.length ? (

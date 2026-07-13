@@ -13,7 +13,7 @@ export async function createMilestone(projectId: string, formData: FormData) {
     if (!user) return { error: "Not authenticated" };
 
     const name = formData.get("name") as string;
-    if (!name?.trim()) return { error: "Nama milestone wajib diisi" };
+    if (!name?.trim()) return { error: "Nama grup wajib diisi" };
 
     const { count } = await supabase
         .from("milestones")
@@ -34,7 +34,7 @@ export async function createMilestone(projectId: string, formData: FormData) {
         entityId: projectId,
         entityName: name.trim(),
         action: "created",
-        detail: "milestone",
+        detail: "grup",
     });
 
     revalidatePath(`/projects/${projectId}`);
